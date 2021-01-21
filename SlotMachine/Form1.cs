@@ -18,14 +18,14 @@ namespace SlotMachine
 
             if (decimal.TryParse(txtAmountInserted.Text, out amountInserted) && amountInserted > 0)
             {
-            Random rnd = new Random();
-            int pic_1 = rnd.Next(0, 3);
-            int pic_2 = rnd.Next(0, 3);
-            int pic_3 = rnd.Next(0, 3);
+                Random rnd = new Random();
+                int pic_1 = rnd.Next(0, 3);
+                int pic_2 = rnd.Next(0, 3);
+                int pic_3 = rnd.Next(0, 3);
 
-            pic1.Image = imgFruit.Images[pic_1];
-            pic2.Image = imgFruit.Images[pic_2];
-            pic3.Image = imgFruit.Images[pic_3];
+                pic1.Image = imgFruit.Images[pic_1];
+                pic2.Image = imgFruit.Images[pic_2];
+                pic3.Image = imgFruit.Images[pic_3];
 
                 totalInserted += amountInserted;
                 totalWon += amountWon = GetWinningAmount(pic_1, pic_2, pic_3, amountInserted);
@@ -41,11 +41,15 @@ namespace SlotMachine
             {
                 return amountInserted * 2;
             }
-            return -amountInserted;
+            else if (p1 != p2 && p2 != p3 && p1 != p3)
+            {
+                return -amountInserted;
+            }
+            return 0;
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Total inserted = {totalInserted}".ToString() + 
+            MessageBox.Show($"Total inserted = {totalInserted}".ToString() +
                             $"\nTotal won = {totalWon}".ToString());
         }
     }
